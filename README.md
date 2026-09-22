@@ -32,14 +32,20 @@ into one JSON, grouped by project.
 ## Step 1 — capture a HAR
 
 1. Open a desktop browser, log into the Plaud web app.
-2. Open DevTools (`F12`) → **Network** tab, tick **Preserve log**, filter to **Fetch/XHR** — **do
-   this before you load or reload the page**. Starting the capture after the page has already
-   loaded is the single most common way this goes wrong: it looks fine (you'll see some requests)
-   but silently misses the two you need.
+2. Open DevTools (`F12`) → **Network** tab, filter to **Fetch/XHR** — **do this before you load or
+   reload the page**. Starting the capture after the page has already loaded is the single most
+   common way this goes wrong: it looks fine (you'll see some requests) but silently misses the two
+   you need. Tick **Preserve log** too if your browser offers it — it isn't always required, but it
+   costs nothing and guards against the log clearing on reload.
 3. Reload the page. You do **not** need to click into individual projects — one page load fetches
    everything.
-4. Right-click the request list → **Save all as HAR with content**. The *with content* variant is
-   essential; the plain "Save all as HAR" option drops response bodies and the file is useless.
+4. Save the requests as a HAR **with response bodies included**. The exact menu wording differs by
+   browser:
+   - **Chrome / Edge**: right-click the request list → **Save all as HAR with content**. Use the
+     *with content* variant specifically — the plain "Save all as HAR" option drops response bodies
+     and the file is useless for this.
+   - **Firefox**: right-click → **Save All As HAR**. Firefox only has the one option and it already
+     includes response bodies.
 
 **Credential warning:** a HAR captures request headers, so the saved file contains your live Plaud
 auth token. Delete it once you've run the script below — don't commit it or leave it in a synced
